@@ -112,8 +112,6 @@ function game_over(won) {
 }
 
 function show_hint() {
-    if(hints.length === 3)  return;
-
     let list_item = document.createElement('li');
     let hint = document.createElement('h5');
     list_item.append(hint);
