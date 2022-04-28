@@ -2,4 +2,4 @@
 
 This is a number guessing game written in HTML, CSS and JS.
 
-https://bit.ly/3OAHJqu
+Click to play: https://bit.ly/3OAHJqu
