@@ -1,26 +1,22 @@
-let lucky_number = Math.floor((Math.random() * 100)) + 1;
-let attempts = 10;
+let lucky_number = Math.floor((Math.random() * 100)) + 1;   // Create the random number.
+let attempts = 10;  // Set the max attempts to 10.
 
-// Get all the CSS rules.
-const cssRules = document.styleSheets[0];
+const cssRules = document.styleSheets[0]; // Get all the CSS rules.
 
+// Get all the needed components.  
 const main_container = document.querySelector('.main_container');
 const answer = document.querySelector('.answer');
 const attempts_counter = document.querySelector('.attempts_counter');
 const feedback_img = document.querySelector('.feedback_img');
 const feedback = document.querySelector('.feedback');
 
+// Get all the buttons and assign event listeners.
 const check_btn = document.querySelector('.check_btn');
 const hint_btn = document.querySelector('.hint_btn');
 const reset_btn = document.querySelector('.reset_btn');
 check_btn.addEventListener('click', check_answer);
 hint_btn.addEventListener('click', show_hint);
 reset_btn.addEventListener('click', () => window.location.reload());
-
-const hint_list = document.querySelector('.hint_list');
-const hints = [];
-const previous_inputs_list = document.querySelector('.previous_inputs_list');
-const previous_numbers = [];
 
 const user_input = document.querySelector('.user_input');
 const slide = document.querySelector('.slide');
@@ -45,8 +41,7 @@ function check_answer() {
         return;
     }
     
-    // Prevent attempts from getting below 0
-    if(attempts > 0) attempts_counter.innerText = --attempts;
+    if(attempts > 0) attempts_counter.innerText = --attempts;     // Prevent attempts from getting below 0.
     
     if(user_number != lucky_number) {
         user_number > lucky_number ? 
@@ -70,6 +65,7 @@ function change_feedback_and_img(text, img) {
     feedback_img.src = img;
 }
 
+// Call this function to end the game and update the background animation accordingly
 function game_over(won) {
     user_input.disabled = true;
     check_btn.disabled = true;
@@ -111,20 +107,23 @@ function game_over(won) {
     Object.assign(main_container.style, custom_style);
 }
 
+const hint_list = document.querySelector('.hint_list');
+const hints = [];
+const previous_inputs_list = document.querySelector('.previous_inputs_list');
+const previous_numbers = [];
 function show_hint() {
     let list_item = document.createElement('li');
     let hint = document.createElement('h5');
     list_item.append(hint);
 
+    // Tell the user the number is even or odd
     if(!hints[0]) {
-        hint.innerText = 'Did you know you could use binary search for this game?';
-    }
-    else if(!hints[1]) {
         lucky_number % 2 == 0 ? 
             hint.innerText = "It's an even number.":
             hint.innerText = "It's an odd number.";
     }
-    else {
+    // Tell the user the sum of the digit(s)
+    else if(!hints[1]) {
         let digit_sum = 0;
         let copy_of_lucky_number = lucky_number;
 
@@ -136,6 +135,10 @@ function show_hint() {
         hint.innerText = `The sum of the digit(s) of this number is ${digit_sum}.`;
         hint_btn.disabled = true;
         hint_btn.style.cursor = 'default';
+    }
+    // Tell the user they can use binary search for this game
+    else {
+        hint.innerText = 'Did you know you could use binary search for this game?';
     }
 
     hints.push(hint);
