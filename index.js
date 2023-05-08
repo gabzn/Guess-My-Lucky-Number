@@ -133,12 +133,12 @@ function show_hint() {
         }
 
         hint.innerText = `The sum of the digit(s) of this number is ${digit_sum}.`;
-        hint_btn.disabled = true;
-        hint_btn.style.cursor = 'default';
     }
     // Tell the user they can use binary search for this game
     else {
         hint.innerText = 'Did you know you could use binary search for this game?';
+        hint_btn.disabled = true;
+        hint_btn.style.cursor = 'default';
     }
 
     hints.push(hint);
